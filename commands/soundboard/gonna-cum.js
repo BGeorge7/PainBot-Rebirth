@@ -3,10 +3,12 @@ const { SlashCommandBuilder } = require('discord.js');
 const { createAudioPlayer, createAudioResource, AudioPlayerStatus, joinVoiceChannel } = require('@discordjs/voice');
 const { join } = require('node:path');
 
+const commandName = 'I\'m gonna cum'
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cum')
-		.setDescription(':musical_note: I\'m gonna cum :musical_note: '),
+		.setDescription(`:musical_note: ${commandName} :musical_note: `),
 	async execute(interaction, client) {
 
         const player = createAudioPlayer();
@@ -15,7 +17,7 @@ module.exports = {
 
         if(!voicCh.channelId) 
         { 
-            console.log(`${new Date(Date.now())}: ${interaction.user.tag}: Was not in a voice channel`)
+            console.log(`${new Date(Date.now())}: ${interaction.user.tag}: Was not in a voice channel (Command Name: ${commandName})`)
             return interaction.reply({
                 content: "You are not in a voice channel!"
             });
@@ -31,10 +33,10 @@ module.exports = {
         connection.subscribe(player);
 
         player.once(AudioPlayerStatus.Playing, () => {
-            console.log(new Date(Date.now()) + ': I\'m gonna cum is playing');
+            console.log(new Date(Date.now()) + `: ${commandName} is playing`);
 
             interaction.reply({
-                content: ":musical_note: I\'m gonna cum :musical_note:"
+                content: `:musical_note: ${commandName} :musical_note:`
             });
         })
 
