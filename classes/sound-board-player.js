@@ -2,9 +2,7 @@ const { createAudioPlayer, createAudioResource, AudioPlayerStatus, joinVoiceChan
 
 	function sbPlayer(interaction, commandName, fileLocation, volume=1.0) 
     {
-        const player = createAudioPlayer();
-        const resource = createAudioResource(fileLocation, { inlineVolume: true })
-        resource.volume.setVolume(volume);
+       
         const voicCh = interaction.member.voice
 
         if(!voicCh.channelId) 
@@ -14,6 +12,10 @@ const { createAudioPlayer, createAudioResource, AudioPlayerStatus, joinVoiceChan
                 content: "You are not in a voice channel!"
             });
         }
+
+        const player = createAudioPlayer();
+        const resource = createAudioResource(fileLocation, { inlineVolume: true })
+        resource.volume.setVolume(volume);
 
         const connection = joinVoiceChannel({
             channelId: voicCh.channelId,
