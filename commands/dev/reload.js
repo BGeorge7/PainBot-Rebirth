@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, CommandInteraction, PermissionFlagsBits} = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
 const {loadCommands} = require("../../command-handler.js")
 const {loadEvents} = require("../../event-handler.js")
 
@@ -31,7 +31,5 @@ module.exports = {
 			}
 			break;
 		}
-		
-
 	},
 };

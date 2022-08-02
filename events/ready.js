@@ -1,4 +1,4 @@
-const dbConnect = require("../database/connet-db")
+const dbConnect = require("../database/utils/connect-db")
 
 
 module.exports = {

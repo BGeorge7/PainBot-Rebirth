@@ -1,5 +1,5 @@
 const {mongoose, connection} = require("mongoose")
-const { dbConnectionURI } = require('../config.json')
+const { dbConnectionURI } = require('../../config.json')
 
 
 async function connectToDB() {
