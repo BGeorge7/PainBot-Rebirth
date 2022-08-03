@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
-const {loadCommands} = require("../../command-handler.js")
-const {loadEvents} = require("../../event-handler.js")
+const {loadCommands} = require("../../classes/command-handler.js")
+const {loadEvents} = require("../../classes/event-handler.js")
 
 module.exports = {
 	data: new SlashCommandBuilder()

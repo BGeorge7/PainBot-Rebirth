@@ -1,10 +1,13 @@
 
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
-const {loadCommands} = require("./command-handler.js")
-const {loadEvents} = require("./event-handler.js")
+const client = new Client({ 
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] 
+});
+
+const {loadCommands} = require("./classes/command-handler.js")
+const {loadEvents} = require("./classes/event-handler")
 
 loadEvents(client)
 

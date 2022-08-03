@@ -6,6 +6,12 @@ module.exports = {
 	once: true,
 	async execute(client) {
 		await dbConnect.connectToDB()
+		client.user.setPresence({ 
+			activities: [{ 
+				name: 'Now with slash commands!',
+				type: 0
+			}] 
+		});
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 	},
 };

@@ -5,11 +5,11 @@ function loadCommands(client)
 	const path = require('node:path');
 	const { REST } = require('@discordjs/rest');
 	const { Routes } = require('discord.js');
-	const { clientId, guildId, token } = require('./config.json');
+	const { clientId, guildId, token } = require('../config.json');
 
 	let commands = [];
 	let commandsObj = [];
-	const commandsPath = path.join(__dirname, 'commands');
+	const commandsPath = path.join(__dirname, '../commands');
 	
 	const getFiles = (dir, suffix) =>{
 		const files = fs.readdirSync(dir,{
