@@ -1,4 +1,5 @@
 const dbConnect = require("../database/utils/connect-db")
+const {branch} = require("../config.json")
 
 
 module.exports = {
@@ -12,6 +13,6 @@ module.exports = {
 				type: 0
 			}] 
 		});
-		console.log(`Ready! Logged in as ${client.user.tag}`);
+		console.log(`Ready! Logged in as ${client.user.tag}, Running on ${branch}`);
 	},
 };

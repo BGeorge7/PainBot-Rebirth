@@ -22,7 +22,7 @@ function loadCommands(client)
 			if(file.isDirectory()){
 				commandFiles = [
 					...commandFiles,
-					...getFiles(`${dir}\\${file.name}`, suffix),
+					...getFiles(`${dir}/${file.name}`, suffix),
 				]
 			} else if (file.name.endsWith(suffix)) {
 				const filePath = path.join(dir, file.name);
@@ -37,6 +37,7 @@ function loadCommands(client)
 				{
 					command.devFlag = false
 				}
+				console.log(`Command Found: ${command.data.name}`)
 				commandsObj.push(command)
 			}
 		}
