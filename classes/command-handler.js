@@ -1,3 +1,5 @@
+const { Console } = require('node:console');
+
 function loadCommands(client)
 {
 
@@ -5,7 +7,7 @@ function loadCommands(client)
 	const path = require('node:path');
 	const { REST } = require('@discordjs/rest');
 	const { Routes } = require('discord.js');
-	const { clientId, guildId, token } = require('../config.json');
+	const { clientId, guildId, token, branch } = require('../config.json');
 
 	let commands = [];
 	let commandsObj = [];
@@ -53,13 +55,18 @@ function loadCommands(client)
 
 	const rest = new REST({ version: '10' }).setToken(token);
 
-	rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-		.then(() => console.log('Successfully registered application commands. On NAZ'))
+	if(branch === 'Beta')
+	{
+		rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+		.then(() => console.log(`${new Date(Date.now())}: ${branch} detected. Loading commands on to guild: ${guildId}`))
 		.catch(console.error);
-
-	// rest.put(Routes.applicationCommands(clientId), { body: commands })
-	// 	.then(() => console.log('Successfully registered application commands. Global'))
-	// 	.catch(console.error);
+	}
+	else if(branch === 'Production')
+	{
+		rest.put(Routes.applicationCommands(clientId), { body: commands })
+		.then(() => console.log(`${new Date(Date.now())}: ${branch} detected. Loading commands globally`))
+		.catch(console.error);
+	}
 
 	return commandsObj 
 }
