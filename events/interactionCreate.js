@@ -4,7 +4,7 @@ module.exports = {
     once: false,
 	async execute(interaction, client) {
 
-        const { token, ownerId} = require('../config.json');
+        const { ownerId } = require('../config.json');
 
 		if (!interaction.isChatInputCommand()) return;
         const command = client.commands.get(interaction.commandName);

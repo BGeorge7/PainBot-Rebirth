@@ -1,6 +1,6 @@
 
 
-function loadEvents(client)
+async function loadEvents(client)
 {
 
     const fs = require('node:fs');

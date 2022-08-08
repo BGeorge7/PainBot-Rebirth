@@ -27,7 +27,7 @@ module.exports = {
 			myUser.dailyTimeStamp = Date.now()
 			await users.modifyUser(myUser)
 			console.log(`${new Date(Date.now())}: ${interaction.user.tag}: Ran daily`)
-       		interaction.reply({content: `+${dailyBonus}\nYour new balance is: ${myUser.bal}`})
+       		await interaction.reply({content: `+${dailyBonus}\nYour new balance is: ${myUser.bal}`})
 		} 
 		else 
 		{
@@ -36,7 +36,7 @@ module.exports = {
 			//extracts the hours and minutes
 			let formatedTimeLeft = fullTimeLeft.slice(fullTimeLeft.search('T')+1, fullTimeLeft.lastIndexOf(':'))
 			console.log(`${new Date(Date.now())}: ${interaction.user.tag}: Ran daily, but it was not ready`)
-			interaction.reply({content: `Your daily is not ready yet!\nYour daily will reset in ${formatedTimeLeft}`})
+			await interaction.reply({content: `Your daily is not ready yet!\nYour daily will reset in ${formatedTimeLeft}`})
 		}
 	},
 };
