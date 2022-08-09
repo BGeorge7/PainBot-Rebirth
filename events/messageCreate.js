@@ -11,7 +11,7 @@ module.exports = {
         if(message.author.bot) {return} //checks if the message came from a bot
 
         const bridgeDict = bridge.Dictionary
-        const text = message.content
+        const text = message.content.toLowerCase()
 
         if(text.includes(bridgeDict[5], 0) || bridgeCheckAnyWord(text, bridgeDict)) //Checks if the message contains the key word in the dictionary json
         {
