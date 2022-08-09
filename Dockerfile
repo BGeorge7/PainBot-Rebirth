@@ -11,7 +11,7 @@ RUN npm install
 
 # tzdata used to set the time zone of the container
 
-#RUN apt update && apt install tzdata -y
+#RUN apk update && apk install tzdata
 RUN apk update && apk add tzdata
 
 ENV TZ="America/Chicago"
