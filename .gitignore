@@ -2,5 +2,10 @@
 node_modules/
 assets/*
 assets/soundboard/*
+assets/bridge/bridged/*
+assets/bridge/userpfp/*
 !assets/soundboard/.gitkeep
+!assets/bridge/userpfp/.gitkeep
+!assets/bridge/bridged/.gitkeep
 !assets/soundboard
+!assets/bridge
