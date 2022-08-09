@@ -28,7 +28,6 @@ module.exports = {
         let genNum = Math.floor((Math.random() * 100) + 1)
 		let result = (genNum <= 50) ? 'Heads' : 'Tails'
         genNum = (genNum <= 50) ? 0 : 1
-		//console.log(interaction.options.getString('face'))
 
         if(myUser.bal < interaction.options.getInteger('bet'))
 		{
@@ -38,7 +37,6 @@ module.exports = {
 		{
 			if(interaction.options.getString('face').toString() === result)
 			{
-				//console.log(result)
 				myUser.bal += interaction.options.getInteger('bet')
 
 				embed = new EmbedBuilder()
@@ -48,12 +46,10 @@ module.exports = {
 					.setDescription(`You won ${interaction.options.getInteger('bet')}!`)
 					.setImage((result === 'Tails') ? 'https://thankschamp.s3.us-east-2.amazonaws.com/tails.png' : 'https://thankschamp.s3.us-east-2.amazonaws.com/Heads.png')
 					.setTimestamp();
-				//interaction.reply({content: `${result}: You win!\nYour new balance is: ${myUser.bal}`})
 				interaction.reply({embeds: [embed]})
 			}
 			else
 			{
-				//console.log(result)
 				myUser.bal -= interaction.options.getInteger('bet')
 				embed = new EmbedBuilder()
 					.setColor(0xFF0000)
@@ -62,7 +58,6 @@ module.exports = {
 					.setDescription(`You lost ${interaction.options.getInteger('bet')}!`)
 					.setImage((result === 'Tails') ? 'https://thankschamp.s3.us-east-2.amazonaws.com/tails.png' : 'https://thankschamp.s3.us-east-2.amazonaws.com/Heads.png')
 					.setTimestamp();
-				//interaction.reply({content: `${result}: You lose!\nYour new balance is: ${myUser.bal}`})
 				interaction.reply({embeds: [embed]})
 			}
 			await users.modifyUser(myUser)
