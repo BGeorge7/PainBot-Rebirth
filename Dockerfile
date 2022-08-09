@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:16-alpine
 # Create app directory
 WORKDIR /PainBot-Rebirth
 
@@ -10,7 +10,10 @@ COPY package*.json ./
 RUN npm install
 
 # tzdata used to set the time zone of the container
-RUN apt update && apt install tzdata -y
+
+#RUN apt update && apt install tzdata -y
+RUN apk update && apk add tzdata
+
 ENV TZ="America/Chicago"
 # If you are building your code for production
 # RUN npm ci --only=production
