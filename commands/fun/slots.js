@@ -106,13 +106,29 @@ async function startSlots(interaction, client)
             time: 30000,
         })
 
-        collector.on('collect', (i) =>{
+        collector.on('collect', async (i) =>{
             let receivedEmbed = i.message.embeds[0];
 
             if (i.customId === 'bSlotsRoll') {
 
-                receivedEmbed.data.fields[3].name = '```' + Math.floor((Math.random() * 100) + 1) + '```'
                 collector.resetTimer(30000)
+                let boardResults = slotsHelper.randomizeBoard()
+
+                //TODO: Winnings Selection
+                let winnings = slotsHelper.payoutChecker(boardResults)
+                //TODO: UPDATE NEW BALANCE
+                myUser.bal += (currentBet * winnings) - currentBet
+                await users.modifyUser(myUser)
+                myUser = await users.findUser(interaction.member)
+
+                //console.log(`After Change ${myUser}`)
+                //TODO: RETRIEVE UPDATED USER
+                
+                receivedEmbed = slotsHelper.embedRollResults(receivedEmbed, boardResults,
+                    winnings === 0 ? 'LOSER' : 'WINNER',
+                    winnings === 0 ? `You lost ${currentBet}!`: `You won ${(currentBet*winnings)-currentBet}`,
+                    myUser.bal,
+                    winnings === 0 ? 16711680 : 65280) //16711680
                 i.update({ embeds: [receivedEmbed] })
             }
             else if(i.customId === 'bSlotsStop') {
@@ -122,19 +138,19 @@ async function startSlots(interaction, client)
                 message.interaction.editReply({embeds: [receivedEmbed]})
                 collector.stop()
             }
-            else if(i.customId === 'bSlotsPlus'){
+            else if(i.customId === 'bSlotsPlus') {
                 currentBet += currentBet === 25 ? 0 : 5
                 receivedEmbed = slotsHelper.embedSetBet(receivedEmbed, currentBet)
                 i.deferUpdate()
                 message.interaction.editReply({embeds: [receivedEmbed]})
             }
-            else if(i.customId === 'bSlotsMinus'){
+            else if(i.customId === 'bSlotsMinus') {
                 currentBet -= currentBet === 0 ? 0 : 5
                 receivedEmbed = slotsHelper.embedSetBet(receivedEmbed, currentBet)
                 i.deferUpdate()
                 message.interaction.editReply({embeds: [receivedEmbed]})
             }
-            else if(i.customId === 'bSlotsMax'){
+            else if(i.customId === 'bSlotsMax') {
                 receivedEmbed = slotsHelper.embedSetBet(receivedEmbed, currentBet=25)
                 i.deferUpdate()
                 message.interaction.editReply({embeds: [receivedEmbed]})
